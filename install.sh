@@ -45,13 +45,29 @@ fi
 echo "✅ Battery supports required features"
 echo
 
-# Install udev rules
-echo "📦 Installing udev rules..."
-sudo cp "$SCRIPT_DIR/99-battery-threshold.rules" /etc/udev/rules.d/
-sudo udevadm control --reload-rules
-sudo udevadm trigger --subsystem-match=power_supply
-echo "✅ Udev rules installed"
-echo
+# Check if udev rules already exist
+INSTALL_UDEV=true
+if [[ -f /etc/udev/rules.d/99-battery-threshold.rules ]]; then
+    echo "⚠️  Existing udev rules detected at /etc/udev/rules.d/99-battery-threshold.rules"
+    echo
+    read -p "Reinstall udev rules? (y/N, recommended if you used the plugin's setup_rules.sh) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        INSTALL_UDEV=false
+        echo "⏭️  Skipping udev rules installation"
+    fi
+    echo
+fi
+
+# Install udev rules (optional)
+if [[ "$INSTALL_UDEV" == true ]]; then
+    echo "📦 Installing udev rules..."
+    sudo cp "$SCRIPT_DIR/99-battery-threshold.rules" /etc/udev/rules.d/
+    sudo udevadm control --reload-rules
+    sudo udevadm trigger --subsystem-match=power_supply
+    echo "✅ Udev rules installed"
+    echo
+fi
 
 # Install script
 echo "📦 Installing monitoring script..."
@@ -86,8 +102,11 @@ echo
 echo "🎉 Installation complete!"
 echo
 echo "Next steps:"
-echo "  1. Set your battery threshold using your Niri widget"
+echo "  1. Set your battery threshold using the Noctalia plugin"
 echo "  2. Connect AC power"
 echo "  3. Monitor progress: tail -f ~/.local/share/battery-auto-discharge/log"
+echo
+echo "Note: If you skipped udev rules installation, make sure you have write"
+echo "      access to /sys/class/power_supply/BAT1/charge_behaviour"
 echo
 echo "For troubleshooting, see README.md"

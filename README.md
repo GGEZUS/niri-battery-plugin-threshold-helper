@@ -59,7 +59,7 @@ Tested on laptops with:
 First, install and setup the [Battery Threshold plugin](https://noctalia.dev/plugins/battery-threshold):
 
 1. Install the plugin following instructions on [noctalia.dev](https://noctalia.dev/plugins/battery-threshold)
-2. Run the plugin's `setup_rules.sh` to configure write access (or use our installer below)
+2. Run the plugin's `setup_rules.sh` to configure write access **(optional - see below)**
 
 ### Quick Install (Recommended)
 
@@ -81,10 +81,12 @@ curl -fsSL https://raw.githubusercontent.com/GGEZUS/noctalia-battery-plugin-thre
    ```
 
 The installer will:
-- Install udev rules for write access (can replace plugin's setup_rules.sh)
+- **Optionally** install udev rules for write access (skipped if already present)
 - Install the monitoring script
 - Install and enable the systemd service
 - Create log directory
+
+**Note:** If you've already run the plugin's `setup_rules.sh`, the installer will detect existing udev rules and ask if you want to reinstall them. You can safely skip this step.
 
 ## Usage
 
