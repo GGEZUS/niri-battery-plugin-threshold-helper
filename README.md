@@ -174,6 +174,22 @@ Should show: `[auto] inhibit-charge force-discharge`
 
 If `force-discharge` is missing, your laptop may not support this feature.
 
+### Service rapidly switching modes
+
+If you see rapid switching between force-discharge and auto modes in logs:
+```bash
+tail -f ~/.local/share/battery-auto-discharge/log
+```
+
+**Solution:** Ensure your AC adapter is detected:
+```bash
+ls /sys/class/power_supply/ | grep -i ac
+cat /sys/class/power_supply/AC/online
+# Should return 1 when AC is connected
+```
+
+The script requires the AC adapter to be at `/sys/class/power_supply/AC` to properly detect when it's safe to force discharge. If your system uses a different path, you'll need to update the `AC_PATH` variable in the script.
+
 ### Plugin not working
 
 See the [plugin's troubleshooting section](https://noctalia.dev/plugins/battery-threshold):
@@ -187,6 +203,7 @@ See the [plugin's troubleshooting section](https://noctalia.dev/plugins/battery-
 Default settings work for most users. The script checks every 10 seconds:
 
 - **Battery path:** `/sys/class/power_supply/BAT1`
+- **AC adapter path:** `/sys/class/power_supply/AC`
 - **Check interval:** 10 seconds
 - **Log location:** `~/.local/share/battery-auto-discharge/log`
 
