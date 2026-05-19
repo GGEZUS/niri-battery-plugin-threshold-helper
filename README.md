@@ -1,4 +1,4 @@
-# noctalia-plugin-battery-threshold-auto-discharge
+# noctalia-plugin-battery_threshold-auto-discharge
 
 [![Noctalia](https://img.shields.io/badge/Noctalia-Shell-blue)](https://noctalia.dev/)
 [![Arch Linux](https://img.shields.io/badge/Arch-Linux-blue)](https://archlinux.org/)
@@ -64,15 +64,15 @@ First, install and setup the [Battery Threshold plugin](https://noctalia.dev/plu
 ### Quick Install (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/GGEZUS/noctalia-plugin-battery-threshold-auto-discharge/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/GGEZUS/noctalia-plugin-battery_threshold-auto-discharge/main/install.sh | bash
 ```
 
 ### Manual Install
 
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/GGEZUS/noctalia-plugin-battery-threshold-auto-discharge.git
-   cd noctalia-plugin-battery-threshold-auto-discharge
+   git clone https://github.com/GGEZUS/noctalia-plugin-battery_threshold-auto-discharge.git
+   cd noctalia-plugin-battery_threshold-auto-discharge
    ```
 
 2. **Run the installer:**
