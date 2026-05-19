@@ -54,4 +54,4 @@ echo "✅ Logs removed"
 
 echo
 echo "🎉 Uninstallation complete!"
-echo "Thank you for using noctalia-battery-plugin-threshold-auto-discharge!"
+echo "Thank you for using noctalia-plugin-battery-threshold-auto-discharge!"
