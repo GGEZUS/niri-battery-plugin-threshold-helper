@@ -43,6 +43,7 @@ This helper solves that by automatically discharging to your target threshold wh
 - **Battery charge behaviour control** (`force-discharge` mode support)
 
 Tested on laptops with:
+- **Lenovo ThinkPad T480** (Arch Linux + Niri + Noctalia)
 - `/sys/class/power_supply/BAT1/charge_control_end_threshold`
 - `/sys/class/power_supply/BAT1/charge_behaviour` with `force-discharge` option
 
