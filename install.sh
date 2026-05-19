@@ -65,8 +65,7 @@ USER=$(whoami)
 
 # Create systemd service with correct user
 echo "📦 Installing systemd service..."
-sed "s/User=rbc/User=$USER/g" "$SCRIPT_DIR/battery-auto-discharge.service" | \
-    sed "s|/home/rbc/.local/share|$HOME/.local/share|g" | \
+sed "s/YOUR_USERNAME/$USER/g" "$SCRIPT_DIR/battery-auto-discharge.service" | \
     sudo tee /etc/systemd/system/battery-auto-discharge.service > /dev/null
 
 sudo systemctl daemon-reload
