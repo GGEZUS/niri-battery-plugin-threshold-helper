@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-echo "🗑️  Niri Battery Plugin Threshold Helper - Uninstaller"
-echo "======================================================"
+echo "🗑️  Noctalia Battery Plugin Threshold Auto-Discharge - Uninstaller"
+echo "================================================================="
 echo
 
 # Check if running as root
@@ -54,4 +54,4 @@ echo "✅ Logs removed"
 
 echo
 echo "🎉 Uninstallation complete!"
-echo "Thank you for using niri-battery-plugin-threshold-helper!"
+echo "Thank you for using noctalia-battery-plugin-threshold-auto-discharge!"

@@ -1,9 +1,9 @@
-# niri-battery-plugin-threshold-helper
+# noctalia-battery-plugin-threshold-auto-discharge
 
-[![Niri](https://img.shields.io/badge/Niri-Window%20Manager-blue)](https://github.com/YaLTeR/niri)
+[![Noctalia](https://img.shields.io/badge/Noctalia-Shell-blue)](https://noctalia.dev/)
 [![Arch Linux](https://img.shields.io/badge/Arch-Linux-blue)](https://archlinux.org/)
 
-Automatic battery discharge helper for Niri window manager on Arch Linux. Works with the [Noctalia Battery Threshold plugin](https://noctalia.dev/plugins/battery-threshold) to actively discharge your battery when it's above the set threshold while connected to AC power.
+Automatic battery discharge helper for Linux laptops. Works with the [Noctalia Battery Threshold plugin](https://noctalia.dev/plugins/battery-threshold) to actively discharge your battery when it's above the set threshold while connected to AC power.
 
 ## About the Plugin
 
@@ -47,9 +47,9 @@ Tested on laptops with:
 - `/sys/class/power_supply/BAT1/charge_behaviour` with `force-discharge` option
 
 ### Software
-- **Niri** window manager on Arch Linux
-- **Noctalia Shell** 3.6.0 or later
+- **Noctalia Shell** 3.6.0 or later (or any Wayland compositor with the plugin)
 - **Battery Threshold Control** plugin by Wilfred Mallawa
+- Linux distribution with systemd support
 
 ## Installation
 
@@ -63,15 +63,15 @@ First, install and setup the [Battery Threshold plugin](https://noctalia.dev/plu
 ### Quick Install (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/GGEZUS/niri-battery-plugin-threshold-helper/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/GGEZUS/noctalia-battery-plugin-threshold-auto-discharge/main/install.sh | bash
 ```
 
 ### Manual Install
 
 1. **Clone the repo:**
    ```bash
-   git clone https://github.com/GGEZUS/niri-battery-plugin-threshold-helper.git
-   cd niri-battery-plugin-threshold-helper
+   git clone https://github.com/GGEZUS/noctalia-battery-plugin-threshold-auto-discharge.git
+   cd noctalia-battery-plugin-threshold-auto-discharge
    ```
 
 2. **Run the installer:**
@@ -193,7 +193,6 @@ To customize, edit `/usr/local/bin/battery-auto-discharge` and restart the servi
 
 - **Plugin:** [Battery Threshold Control](https://noctalia.dev/plugins/battery-threshold) by [Wilfred Mallawa](https://github.com/wilfred-mallawa)
 - **Noctalia Shell:** [noctalia.dev](https://noctalia.dev/)
-- **Niri WM:** [github.com/YaLTeR/niri](https://github.com/YaLTeR/niri)
 
 ## Contributing
 
@@ -205,6 +204,5 @@ MIT License - feel free to use and modify as needed.
 
 ## Acknowledgments
 
-- Built for [Niri](https://github.com/YaLTeR/niri) window manager
 - Works with [Noctalia Battery Threshold plugin](https://noctalia.dev/plugins/battery-threshold) by Wilfred Mallawa
 - Inspired by the need for better battery management on Linux laptops

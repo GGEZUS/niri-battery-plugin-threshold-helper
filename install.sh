@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-echo "🔋 Niri Battery Plugin Threshold Helper - Installer"
-echo "=================================================="
+echo "🔋 Noctalia Battery Plugin Threshold Auto-Discharge - Installer"
+echo "==============================================================="
 echo
 
 # Check if running as root
