@@ -1,14 +1,14 @@
-# niri-battery-widget-threshold-helper
+# niri-battery-plugin-threshold-helper
 
 [![Niri](https://img.shields.io/badge/Niri-Window%20Manager-blue)](https://github.com/YaLTeR/niri)
 [![Arch Linux](https://img.shields.io/badge/Arch-Linux-blue)](https://archlinux.org/)
 
-Automatic battery discharge helper for Niri window manager on Arch Linux. Works with battery threshold widgets to actively discharge your battery when it's above the set threshold while connected to AC power.
+Automatic battery discharge helper for Niri window manager on Arch Linux. Works with battery threshold plugins to actively discharge your battery when it's above the set threshold while connected to AC power.
 
 ## Features
 
 - **Auto-discharge to threshold**: When AC is connected and battery is above the widget's threshold, actively discharges to the target level
-- **Widget integration**: Reads directly from `charge_control_end_threshold` - works with any battery widget
+- **Plugin integration**: Reads directly from `charge_control_end_threshold` - works with any battery plugin
 - **Set and forget**: Runs in background via systemd, automatically adapts to your widget settings
 - **Safe operation**: Returns to auto mode when on battery power or threshold is reached
 
@@ -57,7 +57,7 @@ The installer will:
 
 ## Usage
 
-1. **Set your battery threshold** using your Niri widget (e.g., set to 65%)
+1. **Set your battery threshold** using your Niri plugin (e.g., set to 65%)
 2. **Connect AC power**
 3. **Done!** The helper will automatically discharge to your threshold
 

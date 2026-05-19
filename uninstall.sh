@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "🗑️  Niri Battery Widget Threshold Helper - Uninstaller"
+echo "🗑️  Niri Battery Plugin Threshold Helper - Uninstaller"
 echo "======================================================"
 echo
 
@@ -54,4 +54,4 @@ echo "✅ Logs removed"
 
 echo
 echo "🎉 Uninstallation complete!"
-echo "Thank you for using niri-battery-widget-threshold-helper!"
+echo "Thank you for using niri-battery-plugin-threshold-helper!"

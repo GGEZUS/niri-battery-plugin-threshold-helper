@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-echo "🔋 Niri Battery Widget Threshold Helper - Installer"
+echo "🔋 Niri Battery Plugin Threshold Helper - Installer"
 echo "=================================================="
 echo
 
