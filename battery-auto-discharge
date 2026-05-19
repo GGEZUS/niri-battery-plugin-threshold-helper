@@ -2,6 +2,7 @@
 # Auto-discharge battery when above threshold while on AC power
 
 BAT_PATH="/sys/class/power_supply/BAT1"
+AC_PATH="/sys/class/power_supply/AC"
 THRESHOLD_FILE="$BAT_PATH/charge_control_end_threshold"
 CAPACITY_FILE="$BAT_PATH/capacity"
 STATUS_FILE="$BAT_PATH/status"
@@ -21,10 +22,13 @@ while true; do
     CAPACITY=$(cat "$CAPACITY_FILE" 2>/dev/null || echo 0)
     STATUS=$(cat "$STATUS_FILE" 2>/dev/null || echo "Unknown")
 
-    # Check if on AC power (not discharging)
-    ON_AC=true
-    if [[ "$STATUS" == "Discharging" ]]; then
-        ON_AC=false
+    # Check if on AC power by reading AC adapter
+    ON_AC=false
+    if [[ -f "$AC_PATH/online" ]]; then
+        AC_ONLINE=$(cat "$AC_PATH/online" 2>/dev/null || echo "0")
+        if [[ "$AC_ONLINE" == "1" ]]; then
+            ON_AC=true
+        fi
     fi
 
     # Only act if on AC power and threshold is less than 100
@@ -34,14 +38,14 @@ while true; do
             CURRENT_BEHAVIOUR=$(cat "$BEHAVIOUR_FILE" 2>/dev/null || echo "auto")
             if [[ "$CURRENT_BEHAVIOUR" != "force-discharge" ]]; then
                 echo "force-discharge" > "$BEHAVIOUR_FILE" 2>/dev/null && \
-                    log "Force discharge: $CAPACITY% > $THRESHOLD% (status: $STATUS)"
+                    log "Force discharge: $CAPACITY% > $THRESHOLD% (AC online)"
             fi
         else
             # Battery at or below threshold - return to auto
             CURRENT_BEHAVIOUR=$(cat "$BEHAVIOUR_FILE" 2>/dev/null || echo "auto")
             if [[ "$CURRENT_BEHAVIOUR" != "auto" ]]; then
                 echo "auto" > "$BEHAVIOUR_FILE" 2>/dev/null && \
-                    log "Auto mode: $CAPACITY% <= $THRESHOLD%"
+                    log "Auto mode: $CAPACITY% <= $THRESHOLD% (AC online)"
             fi
         fi
     else
@@ -49,7 +53,7 @@ while true; do
         CURRENT_BEHAVIOUR=$(cat "$BEHAVIOUR_FILE" 2>/dev/null || echo "auto")
         if [[ "$CURRENT_BEHAVIOUR" != "auto" ]]; then
             echo "auto" > "$BEHAVIOUR_FILE" 2>/dev/null && \
-                log "Auto mode: Status=$STATUS, Threshold=$THRESHOLD"
+                log "Auto mode: AC offline or threshold at 100%"
         fi
     fi
 
