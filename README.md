@@ -98,11 +98,11 @@ The installer will:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  Plugin threshold: 65%                                       │
+│  Plugin threshold: 65%                                      │
 │  Current battery: 100%                                      │
 │  AC: Connected                                              │
 ├─────────────────────────────────────────────────────────────┤
-│  → Force discharge until battery reaches 65%               │
+│  → Force discharge until battery reaches 65%                │
 │  → Switch to auto mode at 65%                               │
 │  → Maintain 65% while on AC                                 │
 └─────────────────────────────────────────────────────────────┘
