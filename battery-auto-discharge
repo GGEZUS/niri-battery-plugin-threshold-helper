@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Auto-discharge battery when above threshold while on AC power
+
+BAT_PATH="/sys/class/power_supply/BAT1"
+THRESHOLD_FILE="$BAT_PATH/charge_control_end_threshold"
+CAPACITY_FILE="$BAT_PATH/capacity"
+STATUS_FILE="$BAT_PATH/status"
+BEHAVIOUR_FILE="$BAT_PATH/charge_behaviour"
+LOG_FILE="$HOME/.local/share/battery-auto-discharge/log"
+
+# Create log directory if needed
+mkdir -p "$(dirname "$LOG_FILE")" 2>/dev/null
+
+log() {
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
+}
+
+while true; do
+    # Read current values
+    THRESHOLD=$(cat "$THRESHOLD_FILE" 2>/dev/null || echo 100)
+    CAPACITY=$(cat "$CAPACITY_FILE" 2>/dev/null || echo 0)
+    STATUS=$(cat "$STATUS_FILE" 2>/dev/null || echo "Unknown")
+
+    # Check if on AC power (not discharging)
+    ON_AC=true
+    if [[ "$STATUS" == "Discharging" ]]; then
+        ON_AC=false
+    fi
+
+    # Only act if on AC power and threshold is less than 100
+    if [[ "$ON_AC" == true ]] && [[ "$THRESHOLD" -lt 100 ]]; then
+        if [[ "$CAPACITY" -gt "$THRESHOLD" ]]; then
+            # Battery above threshold - force discharge
+            CURRENT_BEHAVIOUR=$(cat "$BEHAVIOUR_FILE" 2>/dev/null || echo "auto")
+            if [[ "$CURRENT_BEHAVIOUR" != "force-discharge" ]]; then
+                echo "force-discharge" > "$BEHAVIOUR_FILE" 2>/dev/null && \
+                    log "Force discharge: $CAPACITY% > $THRESHOLD% (status: $STATUS)"
+            fi
+        else
+            # Battery at or below threshold - return to auto
+            CURRENT_BEHAVIOUR=$(cat "$BEHAVIOUR_FILE" 2>/dev/null || echo "auto")
+            if [[ "$CURRENT_BEHAVIOUR" != "auto" ]]; then
+                echo "auto" > "$BEHAVIOUR_FILE" 2>/dev/null && \
+                    log "Auto mode: $CAPACITY% <= $THRESHOLD%"
+            fi
+        fi
+    else
+        # On battery or threshold at 100 - ensure auto mode
+        CURRENT_BEHAVIOUR=$(cat "$BEHAVIOUR_FILE" 2>/dev/null || echo "auto")
+        if [[ "$CURRENT_BEHAVIOUR" != "auto" ]]; then
+            echo "auto" > "$BEHAVIOUR_FILE" 2>/dev/null && \
+                log "Auto mode: Status=$STATUS, Threshold=$THRESHOLD"
+        fi
+    fi
+
+    sleep 10
+done

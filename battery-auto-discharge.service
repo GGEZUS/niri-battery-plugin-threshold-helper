@@ -1,0 +1,23 @@
+[Unit]
+Description=Battery Auto-Discharge Service
+Documentation=https://github.com/YaLTeR/niri
+After=multi-user.target
+StartLimitBurst=3
+StartLimitIntervalSec=10
+
+[Service]
+Type=simple
+User=rbc
+ExecStart=/usr/local/bin/battery-auto-discharge
+Restart=always
+RestartSec=5
+Nice=10
+
+# Security hardening
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/sys/class/power_supply/BAT1 /home/rbc/.local/share
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

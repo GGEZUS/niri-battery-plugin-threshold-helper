@@ -1,0 +1,16 @@
+# Log files
+*.log
+
+# Backup files
+*.backup
+*.bak
+
+# Editor files
+*~
+.*.swp
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/
